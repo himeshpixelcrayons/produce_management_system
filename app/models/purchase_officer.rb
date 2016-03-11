@@ -1,0 +1,2 @@
+class PurchaseOfficer < User
+end

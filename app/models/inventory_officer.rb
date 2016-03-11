@@ -1,0 +1,2 @@
+class InventoryOfficer < User
+end

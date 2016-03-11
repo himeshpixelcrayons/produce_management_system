@@ -1,0 +1,19 @@
+%h1 Listing Product Types
+
+%table.table.table-bordered.table-striped.table-responsive.table-hover
+  %thead
+    %tr
+      %th Name
+      %th{:colspan => "2"}
+
+  %tbody
+    - @product_types.each do |product_type|
+      %tr
+        %td= product_type.name
+        %td= link_to 'Show', product_type, class: "btn btn-primary"
+        %td= link_to 'Edit', edit_product_type_path(product_type)
+        %td= link_to 'Destroy', product_type, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Product type', new_product_type_path, class: 'btn btn-default'
