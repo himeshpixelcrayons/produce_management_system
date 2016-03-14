@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %title ProduceManagementSystem
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+
+  %body.menubar-hoverable.header-fixed{ class: ''}
+    -if current_user
+      = render :partial =>'layouts/header'
+      #base
+        #offcanvas
+        #content
+          %section
+            .section-body
+              .row
+                = flash_message
+                = yield
+        = render :partial => 'layouts/menubar'
+    - else
+      = yield

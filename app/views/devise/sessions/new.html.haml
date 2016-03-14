@@ -1,34 +1,52 @@
-#login-wraper
-  = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'login-form form-horizontal' }) do |f|
-    .body
-      %h1
-        %i.fa.fa-lock
-        Sign in
-      .form-group
-        .col-xs-12
-          .input-group
-            %span.input-group-addon
-              %i.fa.fa-envelope.fa-fw
-            = f.text_field :email, class: 'form-control input-lg', placeholder: 'Email'
-      .form-group
-        .col-xs-12
-          .input-group
-            %span.input-group-addon
-              %i.fa.fa-key.fa-fw
-            = f.password_field :password, class: 'form-control input-lg', placeholder: 'Password'
-      - if devise_mapping.rememberable?
-        .field.pull-left
-          = f.check_box :remember_me
-          = f.label :remember_me
-      .form-group.formSubmit
-        .col-xs-7
-        .col-xs-5.submitWrap
-          = f.submit "Log in", class: "btn btn-primary btn-md"
-      .form-group.formNotice
-        .col-xs-12
-          = render "devise/shared/links"
-:javascript
-  $(document).ready(function(){
-    $(".alert").fadeOut(5000);
-    $(".alert").css('position', 'absolute');
-  });
+!!!
+%html{:lang => "en"}
+  %head
+    %title Login
+  %body.menubar-hoverable.header-fixed
+    / BEGIN LOGIN SECTION
+    %section.section-account
+      .img-backdrop{:style => "background-image: url('/assets/background-image.jpg')"}
+      .spacer
+      .card.contain-sm.style-transparent
+        .card-body
+          .row
+            .col-sm-6
+              %br/
+              %span.text-lg.text-bold.text-primary Login
+              %br/
+              %br/
+              = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form floating-label' }) do |f|
+                .form-group
+                  = f.text_field :email, class: 'form-control', id: 'email'
+                  %label{:for => "email"} Email
+                .form-group
+                  = f.password_field :password, class: 'form-control'
+                  %label{:for => "password"} Password
+                  %p.help-block
+                    %a{:href => "#"} Forgotten?
+                %br/
+                .row
+                  .col-xs-6.text-left
+                    .checkbox.checkbox-inline.checkbox-styled
+                      %label
+                        %input{:type => "checkbox"}/
+                        %span Remember me
+                  / end .col
+                  .col-xs-6.text-right
+                    %button.btn.btn-primary.btn-raised{:type => "submit"} Login
+                  / end .col
+                / end .row
+            / end .col
+            .col-sm-5.col-sm-offset-1.text-center
+              %br/
+              %br/
+              %h3.text-light
+                No account yet?
+              = link_to "Sign up here", new_user_registration_path, class: "btn btn-block btn-raised btn-primary"
+              %br/
+              %br/
+            / end .col
+          / end .row
+        / end .card-body
+      / end .card
+    / END LOGIN SECTION

@@ -1,5 +1,26 @@
-%ul.nav.nav-sidebar
-  %li.active
-    = link_to "Process Sales Order", "#"
-  %li
-    = link_to "Product Types", product_types_path
+#menubar.menubar-inverse
+  .menubar-fixed-panel
+    %div
+      %a.btn.btn-icon-toggle.btn-default.menubar-toggle{"data-toggle" => "menubar", :href => "javascript:void(0);"}
+        %i.fa.fa-bars
+    .expanded
+      %a{:href => root_path}
+        %span.text-lg.text-bold.text-primary Produce Management System
+  .nano
+    .nano-content
+      .menubar-scroll-panel
+        %ul#main-menu.gui-controls
+          %li
+            %a{:href => root_path, class: active_class('home')}
+              .gui-icon
+                %i.fa.fa-home
+              %span.title Home
+          %li{class: active_class('product_types')}
+            %a{:href => product_types_path }
+              .gui-icon
+                %i.fa.fa-product-hunt
+              %span.title Product Types
+        .menubar-foot-panel
+          %small.no-linebreak.hidden-folded
+            %span.opacity-75 Copyright © 2014
+            %strong ProduceManagementSystem

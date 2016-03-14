@@ -10,11 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
-@import "bootstrap-sprockets";
-@import "bootstrap";
 
 #login-wraper {
   -webkit-border-radius: 15px;
@@ -223,4 +222,77 @@ padding-bottom: 5px;
 .inline{
   display: inline;
   padding-left: 15px;
+}
+
+.hide{
+display: none;
+}
+
+.pull-right{
+  float: right;
+}
+
+.pull-left{
+  float: left
+}
+
+.nav-header{
+  height: 50px;
+}
+
+.api_formation{
+  display: flex;
+  width: 100%;
+}
+
+.api_formation .left_side {
+  width: 48%;
+  float: left;
+  border: 1px #ccc solid;
+  margin: 0 5% 0 0;
+  padding: 10px;
+  height: 400px;
+  overflow: auto;
+}
+
+.api_formation .right-side {
+  width: 48%;
+  float: left;
+  border: 1px #ccc solid;
+  height: 400px;
+  padding: 10px;
+  position: relative;
+}
+
+.right-side .api-response{
+  overflow: auto;
+  height: 400px;
+  padding: 1px;
+  width: 100%;
+}
+
+.clear-response{
+  right: 1px;
+  position: absolute;
+}
+
+.Salon-details{
+  display: inline-block;
+}
+
+.field.row_json textarea{
+  width: 100%;
+  height: 160px;
+}
+
+.overlay{
+  position: absolute;
+  width: 98%;
+  height: 400px;
+  opacity: 0.82;
+  background-color: highlighttext;
+  display: none;
+}
+.overlay .loader{
+  margin: 20% 35%;
 }
