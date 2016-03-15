@@ -15,11 +15,24 @@
               .gui-icon
                 %i.fa.fa-home
               %span.title Home
-          %li{class: active_class('product_types')}
-            %a{:href => product_types_path }
+          %li.gui-folder
+            %a
               .gui-icon
                 %i.fa.fa-product-hunt
-              %span.title Product Types
+              %span.title Product Sales Order
+            %ul
+              %li
+                = link_to product_types_path, class: active_class('product_types') do
+                  %span.title Product Types
+              %li
+                = link_to products_path, class: active_class('products') do
+                  %span.title Products
+              %li
+                = link_to orders_path, class: active_class('orders') do
+                  %span.title Orders
+              %li
+                = link_to deliveries_path, class: active_class('deliveries') do
+                  %span.title Delivery
         .menubar-foot-panel
           %small.no-linebreak.hidden-folded
             %span.opacity-75 Copyright © 2014

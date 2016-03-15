@@ -1,10 +1,17 @@
 = simple_form_for @product_type, html: {class: 'form'} do |f|
-	= f.error_notification
-	.row
-		.col-md-6
-			.form-group
-				= f.input :name, input_html: { class: 'form-control', id: 'name' }, label: false
-				%label{:for => 'name' } Name
-	%br
-	.actions
-		= f.submit 'Save', class: "btn btn-default"
+  = f.error_notification
+  .row
+    .col-md-6
+      .form-group
+        %label.col-sm-4.control-label{:for => 'product_type_name' } Name
+        .col-sm-8
+          = f.input :name, input_html: { class: 'form-control' }, label: false
+    .col-md-6
+      .form-group.floating-label
+        .input-group
+          .input-group-addon
+            %label
+              = f.input :is_active, as: :boolean, :input_html => { checked: f.object.is_active }, label: "Active"
+  %br
+  .actions
+    = f.submit 'Save', class: "btn ink-reaction btn-flat btn-primary"

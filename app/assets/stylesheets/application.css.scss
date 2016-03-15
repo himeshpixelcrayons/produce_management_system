@@ -14,92 +14,11 @@
  *= require_tree .
  *= require_self
  */
-
-#login-wraper {
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
-  border-radius: 15px;
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  display: block;
-  margin-top: -159px;
-  margin-left: -235px;
-  padding: 25px;
-  width: 480px;
-  height: 320px;
-  background: white;
-  text-align: center;
-  opacity: 0.9;
+span.error, .error_notification{
+  color: red;
 }
-user agent stylesheetdiv {
-  display: block;
-}
-.login-form legend {
-  font-family: 'Lato', Helvetica, sans-serif;
-  font-size: 36px;
-  font-weight: 300;
-  color: #333333;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-#login-wraper h1 {
-  text-align: center;
-  font-weight: 700;
-  margin: 5px 0 15px;
-}
-.form-horizontal .form-group {
-  margin-left: -15px;
-  margin-right: -15px;
-}
-.height{
-	height: 500px;
-}
-#login-wraper .formSubmit {
-  margin-bottom: 25px;
-}
-.alert{
-  position: relative;
-  width: 100%;
-  text-align: center;
-  font-size: 16px;
-  top: 27%;
-}
-.login{
-  position: absolute;
-  width: 100%;
-  height: 80%;
-}
-.font-white{
-  color: #fff;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 45px;
-  background-color: #000;
-}
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  width: 100%;
-}
-.background{
-  background: url('building.jpg');
-  background-size: cover;
-  /*background-color: #e3d0b1;*/
-}
-.footer p{
-  margin-top: 15px;
+.field_with_errors input, select{
+  border-bottom-color: red;
 }
 .navbar-inner{
   border:0;

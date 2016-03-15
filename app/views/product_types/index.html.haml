@@ -4,15 +4,15 @@
   %thead
     %tr
       %th Name
-      %th{:colspan => "3"}
+      %th Active
+      %th{:colspan => "3"} Actions
 
   %tbody
     - @product_types.each do |product_type|
       %tr
         %td= product_type.name
+        %td= product_type.is_active ? "Yes" : "No"
         %td
-          = link_to product_type_path(product_type), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
-            %i.fa.fa-eye
           = link_to edit_product_type_path(product_type), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
             %i.fa.fa-pencil
           = link_to product_type_path(product_type), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn ink-reaction btn-icon-toggle btn-primary' do

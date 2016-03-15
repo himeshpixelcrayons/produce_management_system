@@ -16,8 +16,7 @@
             %a.dropdown-toggle.ink-reaction{"data-toggle" => "dropdown", :href => "javascript:void(0);"}
               %img{:alt => "", :src => image_path('avatar1.jpg')}
                 %span.profile-info
-                  Admin
-                  %small Administrator
+                  = current_user.email
             %ul.dropdown-menu.animation-dock
               %li
                 %a{"data-method" => "DELETE", :href => "/users/sign_out", :rel => "nofollow", :title => "Logout"}
