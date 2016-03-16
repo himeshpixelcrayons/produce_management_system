@@ -22,5 +22,13 @@
         %label.col-sm-4.control-label{:for => 'product_price' } Price
         .col-sm-8
           = f.input :price, input_html: { class: 'form-control' }, label: false
+  .row
+    .col-md-6
+      .form-group
+        %label.col-sm-4.control-label{:for => 'product_unit_of_quantity' } Units Of Quantity
+        .col-sm-8
+          = f.input :unit_of_quantity, as: :select, collection: Product::UNIT_OF_QUANTITY.map{|v| [v,v]}, input_html: { class: 'form-control' }, label: false
+  %br/
+  %br/
   .form-actions
     = f.button :submit, class: "btn ink-reaction btn-flat btn-primary"
