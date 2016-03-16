@@ -18,7 +18,7 @@ span.error, .error_notification{
   color: red;
 }
 .field_with_errors input, select{
-  border-bottom-color: red;
+  border-bottom-color: red !important;
 }
 .navbar-inner{
   border:0;
