@@ -5,7 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.text :address
       t.integer :contact
       t.date :date
-
+      t.float :amount_delivered
       t.timestamps null: false
     end
   end

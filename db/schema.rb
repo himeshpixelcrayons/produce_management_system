@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(version: 20160316103529) do
     t.text     "address"
     t.integer  "contact"
     t.date     "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.float    "amount_delivered"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "product_types", force: :cascade do |t|
