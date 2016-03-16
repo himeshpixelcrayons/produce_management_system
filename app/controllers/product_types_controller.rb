@@ -28,7 +28,7 @@ class ProductTypesController < ApplicationController
 
     respond_to do |format|
       if @product_type.save
-        format.html { redirect_to product_types_path, notice: 'Product type was successfully created.' }
+        format.html { redirect_to product_types_path, flash: { 'alert alert-success' =>  'Product type was successfully created.' }}
         format.json { render :show, status: :created, location: @product_type }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ProductTypesController < ApplicationController
   def update
     respond_to do |format|
       if @product_type.update(product_type_params)
-        format.html { redirect_to product_types_path, notice: 'Product type was successfully updated.' }
+        format.html { redirect_to product_types_path, flash: { 'alert alert-success' => 'Product type was successfully updated.' }}
         format.json { render :show, status: :ok, location: @product_type }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class ProductTypesController < ApplicationController
   def destroy
     @product_type.destroy
     respond_to do |format|
-      format.html { redirect_to product_types_url, notice: 'Product type was successfully destroyed.' }
+      format.html { redirect_to product_types_url, flash: { 'alert alert-success' => 'Product type was successfully destroyed.' }}
       format.json { head :no_content }
     end
   end
