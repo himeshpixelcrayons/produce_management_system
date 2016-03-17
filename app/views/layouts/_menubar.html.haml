@@ -33,6 +33,15 @@
               %li
                 = link_to deliveries_path, class: active_class('deliveries') do
                   %span.title Delivery
+          %li.gui-folder
+            %a
+              .gui-icon
+                %i.fa.fa-user
+              %span.title Product Pricing by Customer
+            %ul
+              %li
+                = link_to customers_path, class: active_class('customers') do
+                  %span.title Customers
         .menubar-foot-panel
           %small.no-linebreak.hidden-folded
             %span.opacity-75 Copyright © 2014

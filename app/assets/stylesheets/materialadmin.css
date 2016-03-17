@@ -1,4 +1,4 @@
-@-webkit-keyframes fadeIn {
+btn-accent@-webkit-keyframes fadeIn {
   from {
     opacity: 0;
   }
@@ -3737,6 +3737,11 @@ fieldset[disabled] .btn-accent-light.active {
   color: #ffffff;
   background-color: #9c27b0;
   border-color: #9c27b0;
+}
+.btn-accent-modified {
+  color: #ffffff;
+  background-color: #0aa89e;
+  border-color: #0aa89e;
 }
 .btn-accent:hover,
 .btn-accent:focus,

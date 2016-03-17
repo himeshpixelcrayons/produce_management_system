@@ -1,0 +1,41 @@
+%h1 Listing Customers
+
+%table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+  %thead
+    %tr
+      %th First name
+      %th Last name
+      %th Street
+      %th City
+      %th State
+      %th Zip
+      %th Country
+      %th City
+      %th Landline
+      %th Cellphone
+      %th Email
+      %th{colspan: "3"} Action
+
+  %tbody
+    - @customers.each do |customer|
+      %tr
+        %td= customer.first_name
+        %td= customer.last_name
+        %td= customer.street
+        %td= customer.city
+        %td= customer.state
+        %td= customer.zip
+        %td= customer.country
+        %td= customer.city
+        %td= customer.landline
+        %td= customer.cellphone
+        %td= customer.email
+        %td
+          = link_to edit_customer_path(customer), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-pencil
+          = link_to customer_path(customer), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-trash
+
+%br
+
+= link_to 'New Customer', new_customer_path, class: 'btn ink-reaction btn-accent-modified'
