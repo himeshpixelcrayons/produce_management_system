@@ -18,6 +18,7 @@ span.error, .error_notification{
   color: red;
 }
 .field_with_errors input,
+.field_with_errors textarea,
 .field_with_errors select {
   border-bottom-color: red ;
 }

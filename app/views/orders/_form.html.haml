@@ -1,11 +1,24 @@
-= simple_form_for(@order) do |f|
-  = f.error_notification
-
-  .form-inputs
-    = f.input :user_id
-    = f.input :address
-    = f.input :contact
-    = f.input :date
-
-  .form-actions
-    = f.button :submit
+.row
+	.col-lg-offset-1.col-md-10
+		= simple_form_for(@order, html: { class: 'form' }) do |f|
+			.card
+				.card-head.style-primary
+					%header New Order
+				.card-body
+					= f.error_notification
+					%br/
+					.row
+						.col-md-6
+							.form-group
+								%label.col-sm-4.control-label Customer Name
+								.col-sm-8
+									= f.input :customer_name, input_html: { class: 'form-control' }, label: false
+						.col-md-6
+							.form-group
+								%label.col-sm-4.control-label Address
+								.col-sm-8
+									= f.input :address, input_html: { class: 'form-control' }, label: false
+									= f.hidden_field :user_id, value: current_user.id
+				.card-actionbar
+					.card-actionbar-row
+						= f.button :submit, class: "btn ink-reaction btn-flat btn-primary"
