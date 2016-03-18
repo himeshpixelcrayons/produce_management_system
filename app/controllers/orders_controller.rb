@@ -15,7 +15,8 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    @products = @order.products.build
+    @products = Product.all
+    @order_items = @order.order_items.present? ? @order.order_items : @order.order_items.build
   end
 
   # GET /orders/1/edit
@@ -26,7 +27,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
+    @products = @order.products || Product.all
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
@@ -66,10 +67,12 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
+      @products = Product.all
+      @order_items = @order.order_items.present? ? @order.order_items : @order.order_items.build
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:user_id, :address, :contact, :date)
+      params.require(:order).permit(:user_id, :customer_id, :date, order_items_attributes: [:id, :quantity, :price, :weight, :amount, :_destroy, :product_id])
     end
 end

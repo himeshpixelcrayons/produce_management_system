@@ -12,4 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-dataTables-min
 //= require_tree .
+$(document).ready(function() {
+	$('.orders').DataTable({
+		"ordering": false,
+		"pageLength": 5
+	});
+});

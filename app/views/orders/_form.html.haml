@@ -3,22 +3,46 @@
 		= simple_form_for(@order, html: { class: 'form' }) do |f|
 			.card
 				.card-head.style-primary
-					%header New Order
+					%header
+						= f.object.new_record? ? "New Order" : "Edit Order"
 				.card-body
 					= f.error_notification
 					%br/
 					.row
 						.col-md-6
 							.form-group
-								%label.col-sm-4.control-label Customer Name
+								%label.col-sm-4.control-label Customer
 								.col-sm-8
-									= f.input :customer_name, input_html: { class: 'form-control' }, label: false
+									= f.input :customer_id, as: :select, collection: Customer.all.map{|v| [v.name, v.id]}, input_html: { class: 'form-control' }, label: false
 						.col-md-6
 							.form-group
 								%label.col-sm-4.control-label Address
 								.col-sm-8
-									= f.input :address, input_html: { class: 'form-control' }, label: false
+									=# f.input :address, input_html: { class: 'form-control' }, label: false
 									= f.hidden_field :user_id, value: current_user.id
+					.row
+						.col-md-6
+							.form-group
+								%label.col-sm-4.control-label Contact
+								.col-sm-8
+									=# f.input :contact, input_html: { class: 'form-control' }, label: false
+					%br/
+					.row
+						.panel.panel-default
+							.panel-body
+								%table.orders.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+									%thead
+										%tr
+											%th
+											%th Quantity
+											%th Weight
+											%th Price
+											%th Amount
+									%tbody
+										- @products.each do |product|
+											%tr
+												= f.fields_for :order_items do |order_item|
+													= render partial: '/order_items/form', locals: { order_item: order_item, product: product }
 				.card-actionbar
 					.card-actionbar-row
 						= f.button :submit, class: "btn ink-reaction btn-primary btn-accent-modified"

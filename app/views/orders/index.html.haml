@@ -3,7 +3,7 @@
 %table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
   %thead
     %tr
-      %th User
+      %th Customer
       %th Address
       %th Contact
       %th Date
@@ -13,11 +13,11 @@
   %tbody
     - @orders.each do |order|
       %tr
-        %td= order.user.email
-        %td= order.address
-        %td= order.contact
+        %td= order.try(:customer).try(:email)
+        %td= order.try(:customer).try(:address)
+        %td= order.try(:customer).try(:cellphone)
         %td= order.date.try(:strftime, "%d %B %Y")
-        %td= order.amount_received
+        %td= #order.amount_received
         %td
           = link_to order_path(order), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
             %i.fa.fa-eye

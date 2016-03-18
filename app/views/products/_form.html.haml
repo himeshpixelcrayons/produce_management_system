@@ -28,6 +28,11 @@
         %label.col-sm-4.control-label{:for => 'product_unit_of_quantity' } Units Of Quantity
         .col-sm-8
           = f.input :unit_of_quantity, as: :select, collection: Product::UNIT_OF_QUANTITY.map{|v| [v,v]}, input_html: { class: 'form-control' }, label: false
+    .col-md-6
+      .form-group
+        %label.col-sm-4.control-label{:for => 'product_weight' } Weights
+        .col-sm-8
+          = f.input :weight, input_html: { class: 'form-control' }, label: false
   %br/
   %br/
   .form-actions
