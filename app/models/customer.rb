@@ -1,4 +1,6 @@
 class Customer < ActiveRecord::Base
+
+	has_many :orders, dependent: :destroy
 	validates :first_name, :last_name, :street, :city, :cellphone, :email, presence: true
 
 	def name
