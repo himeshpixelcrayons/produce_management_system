@@ -13,4 +13,19 @@ $(document).ready(function(){
 		var amount = orderPrice * quantity
 		orderAmountContainer.val(amount)
 	});
+
+	$("#order_customer_id").change(function(){
+		var customerId = $(this).val();
+		if(customerId == ""){
+			$(".customer_address").val("");
+			$(".customer_contact").val("")
+			alert("Please Select Customer");
+		}
+		else{
+			$.ajax({
+				type: "GET",
+				url: '/customers/' + customerId + '/customer_info'
+			});
+		}
+	});
 })

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :customers
+  resources :customers do
+    get :customer_info, on: :member
+  end
   resources :orders
   resources :products
   root 'home#index'

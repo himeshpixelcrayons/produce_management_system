@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy, :customer_info]
 
   # GET /customers
   # GET /customers.json
@@ -58,6 +58,12 @@ class CustomersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def customer_info
+    respond_to do |format|
+      format.js
     end
   end
 
