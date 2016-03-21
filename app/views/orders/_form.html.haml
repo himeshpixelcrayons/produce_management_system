@@ -48,7 +48,7 @@
 											%th Price
 											%th Amount
 									%tbody
-										-if f.object.new_record? and f.object.order_items.blank?
+										-if f.object.new_record? and f.object.errors.blank?
 											- @products.each do |product|
 												%tr
 													= f.fields_for :order_items do |order_item|

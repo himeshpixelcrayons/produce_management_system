@@ -1,6 +1,6 @@
 = hidden_field_tag :product_weight, product.try(:weight)
-= order_item.hidden_field :id, value: order_item.object.id
-= order_item.hidden_field :product_id, value: product.id
+= order_item.hidden_field :id, value: order_item.object.id unless order_item.object.new_record?
+= order_item.hidden_field :product_id, value: product.try(:id)
 %td= product.try(:title)
 %td= order_item.input :quantity, label: false, input_html: { class: 'quantity', value: order_item.object.quantity }
 %td= order_item.input :weight, label: false
