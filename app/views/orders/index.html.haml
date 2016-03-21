@@ -19,8 +19,6 @@
         %td= order.date.try(:strftime, "%d %B %Y")
         %td= #order.amount_received
         %td
-          = link_to order_path(order), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
-            %i.fa.fa-eye
           = link_to edit_order_path(order), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
             %i.fa.fa-pencil
           = link_to order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn ink-reaction btn-icon-toggle btn-primary' do

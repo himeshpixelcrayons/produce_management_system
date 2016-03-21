@@ -5,5 +5,7 @@ class Order < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :customer
 
+	validates :customer_id, presence: true
+
 	accepts_nested_attributes_for :order_items, allow_destroy: true, reject_if: proc { |attributes| attributes['quantity'].blank? || attributes['price'].blank? || attributes['weight'].blank? || attributes['amount'].blank? }
 end

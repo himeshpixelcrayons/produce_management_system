@@ -1,7 +1,8 @@
-= order_item.hidden_field  :product_id, value: product.id
-= hidden_field_tag :product_weight, product.weight
-%td= product.title
+= hidden_field_tag :product_weight, product.try(:weight)
+= order_item.hidden_field :id, value: order_item.object.id
+= order_item.hidden_field :product_id, value: product.id
+%td= product.try(:title)
 %td= order_item.input :quantity, label: false, input_html: { class: 'quantity', value: order_item.object.quantity }
 %td= order_item.input :weight, label: false
-%td= order_item.input :price, input_html: { value: product.price }, label: false
+%td= order_item.input :price, input_html: { value: product.try(:price) || order_item.object.price }, label: false
 %td= order_item.input :amount, label: false

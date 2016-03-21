@@ -21,22 +21,32 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    order_items
   end
 
   # POST /orders
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    @products = @order.products || Product.all
+    @products = Product.all
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { redirect_to orders_path, flash: { 'alert alert-success' => 'Order was successfully created.' }}
         format.json { render :show, status: :created, location: @order }
       else
+        order_items
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def order_items
+    @items = Array.new
+    @products.each do |product|
+      @items << OrderItem.new(order_id: @order.id, product_id: product.id, price: product.price)
+    end
+    @order_items = (@order.order_items + @items).uniq(&:product_id)
   end
 
   # PATCH/PUT /orders/1
@@ -44,9 +54,10 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to orders_path, flash: { 'alert alert-success' => 'Order was successfully updated.' } }
         format.json { render :show, status: :ok, location: @order }
       else
+        order_items
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
@@ -58,7 +69,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, flash: { 'alert alert-success' => 'Order was successfully destroyed.' } }
       format.json { head :no_content }
     end
   end
@@ -68,7 +79,6 @@ class OrdersController < ApplicationController
     def set_order
       @order = Order.find(params[:id])
       @products = Product.all
-      @order_items = @order.order_items.present? ? @order.order_items : @order.order_items.build
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-dataTables-min
+//= require bootstrap
+//= require bootstrap-datepicker
 //= require_tree .
 $(document).ready(function() {
 	$('.orders').DataTable({

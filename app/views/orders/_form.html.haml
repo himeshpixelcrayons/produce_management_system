@@ -18,14 +18,23 @@
 							.form-group
 								%label.col-sm-4.control-label Address
 								.col-sm-8
-									= text_area_tag :address, nil, class: 'form-control customer_address', disabled: true
+									= text_area_tag :address, f.object.try(:customer).try(:address), class: 'form-control customer_address', disabled: true
 									= f.hidden_field :user_id, value: current_user.id
 					.row
 						.col-md-6
 							.form-group
 								%label.col-sm-4.control-label Contact
 								.col-sm-8
-									= text_field_tag :contact, nil, class: 'form-control customer_contact', disabled: true
+									= text_field_tag :contact, f.object.try(:customer).try(:cellphone), class: 'form-control customer_contact', disabled: true
+						.col-md-6
+							.form-group.control-width-normal
+								#demo-date-format.input-group.date
+									.input-group-content
+										%input.form-control{:type => "text", name: "order[date]", value: f.object.date}/
+										%label Date
+									%span.input-group-addon
+										%i.fa.fa-calendar
+
 					%br/
 					.row
 						.panel.panel-default
@@ -39,10 +48,15 @@
 											%th Price
 											%th Amount
 									%tbody
-										- @products.each do |product|
-											%tr
-												= f.fields_for :order_items do |order_item|
-													= render partial: '/order_items/form', locals: { order_item: order_item, product: product }
+										-if f.object.new_record? and f.object.order_items.blank?
+											- @products.each do |product|
+												%tr
+													= f.fields_for :order_items do |order_item|
+														= render partial: '/order_items/form', locals: { order_item: order_item, product: product }
+										- else
+											= f.fields_for :order_items, @order_items do |order_item|
+												%tr
+													= render partial: '/order_items/form', locals: { order_item: order_item, product: order_item.object.try(:product) }
 				.card-actionbar
 					.card-actionbar-row
 						= f.button :submit, class: "btn ink-reaction btn-primary btn-accent-modified"

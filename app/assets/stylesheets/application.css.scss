@@ -10,10 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require font-awesome
- *= require jquery-dataTables-min
- *= require_tree .
- *= require_self
+*= require font-awesome
+*= require bootstrap-datepicker
+*= require jquery-dataTables-min
+*= require_tree .
+*= require_self
  */
 span.error, .error_notification{
   color: red;

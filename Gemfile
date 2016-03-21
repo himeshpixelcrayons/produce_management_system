@@ -30,6 +30,7 @@ gem 'font-awesome-rails'
 # gem 'bcrypt', '~> 3.1.7'
 # City State for getting countries,states and cities
 gem 'city-state', git: 'https://github.com/himeshpixelcrayons/city-state.git'
+gem 'bootstrap-datepicker-rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
