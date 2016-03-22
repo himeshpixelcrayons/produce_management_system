@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :display_order_items]
 
   # GET /orders
   # GET /orders.json
@@ -71,6 +71,13 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to orders_url, flash: { 'alert alert-success' => 'Order was successfully destroyed.' } }
       format.json { head :no_content }
+    end
+  end
+
+  def display_order_items
+    @order_items = @order.order_items
+    respond_to do |format|
+      format.js
     end
   end
 

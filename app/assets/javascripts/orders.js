@@ -18,13 +18,17 @@ $(document).ready(function(){
 		if(productQuantity < quantity){
 			spanContainer.html("<p style='color:red'>You are trying to order in excess to what we have in the inventory</p>")
 		}
+		else{
+			spanContainer.html("");
+		}
 	});
 
-	$("#order_customer_id").change(function(){
+	$(".customer_id").change(function(){
 		var customerId = $(this).val();
 		if(customerId == ""){
 			$(".customer_address").val("");
-			$(".customer_contact").val("")
+			$(".customer_contact").val("");
+			$("#delivery_order_id").empty();
 			alert("Please Select Customer");
 		}
 		else{

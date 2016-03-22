@@ -1,0 +1,26 @@
+.row
+	.col-lg-offset-1.col-md-10
+		= simple_form_for(@delivery, html: { class: 'form' }) do |f|
+			.card
+				.card-head.style-primary
+					%header
+						= f.object.new_record? ? "New Delivery" : "Edit Delivery"
+				.card-body
+					= f.error_notification
+					%br/
+					.row
+						.col-md-6
+							.form-group
+								%label.col-sm-2.control-label Customer
+								.col-sm-8
+									= select_tag :customer_id, options_from_collection_for_select(Customer.all, "id", "name"), include_blank: true, class: 'form-control customer_id'
+								.col-sm-2
+									= link_to "Add Customer", new_customer_path, class: 'btn ink-reaction btn-flat btn-primary' unless Customer.exists?
+						.col-md-6
+							.form-group
+								%label.col-sm-4.control-label Orders
+								.col-sm-8
+									= f.input :order_id, as: :select, collection: [], input_html: { class: 'form-control' }, label: false
+					%br/
+					.row
+						.order-items

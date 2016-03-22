@@ -1,0 +1,24 @@
+.panel.panel-default
+	.panel-body
+		%table.orders-table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+			%thead
+				%tr
+					%th
+					%th Quantity
+					%th Weight
+					%th Price
+					%th Amount
+			%tbody
+				= simple_fields_for :order_items, @order.try(:order_items) do |order_item|
+					%tr
+						= render partial: '/order_items/form', locals: { order_item: order_item, product: order_item.object.try(:product) }
+		%br/
+		= f.button :submit, "Submit", class: "btn ink-reaction btn-primary btn-accent-modified pull-right"
+:javascript
+	$('.orders-table').dataTable( {
+		"bPaginate": true,
+		"bLengthChange": false,
+		"bFilter": true,
+		"bInfo": false,
+		"bAutoWidth": false
+	} );

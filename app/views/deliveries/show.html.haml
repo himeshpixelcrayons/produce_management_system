@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Order:
+  = @delivery.order_id
+%p
+  %b Date delivered:
+  = @delivery.date_delivered
+%p
+  %b Payment type:
+  = @delivery.payment_type
+
+= link_to 'Edit', edit_delivery_path(@delivery)
+\|
+= link_to 'Back', deliveries_path

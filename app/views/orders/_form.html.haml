@@ -13,7 +13,7 @@
 							.form-group
 								%label.col-sm-2.control-label Customer
 								.col-sm-8
-									= f.input :customer_id, as: :select, collection: Customer.all.map{|v| [v.name, v.id]}, input_html: { class: 'form-control' }, label: false
+									= f.input :customer_id, as: :select, collection: Customer.all.map{|v| [v.name, v.id]}, input_html: { class: 'form-control customer_id' }, label: false
 								.col-sm-2
 									= link_to "Add Customer", new_customer_path, class: 'btn ink-reaction btn-flat btn-primary' unless Customer.exists?
 						.col-md-6
