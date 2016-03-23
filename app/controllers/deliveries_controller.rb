@@ -25,6 +25,12 @@ class DeliveriesController < ApplicationController
   # POST /deliveries.json
   def create
     @delivery = Delivery.new(delivery_params)
+    if params[:order_items_attributes].present?
+      order_items_params.each do |key, value|
+        order_item = OrderItem.find(key)
+        order_item.update_attributes(value)
+      end
+    end
     respond_to do |format|
       if @delivery.save
         format.html { redirect_to @delivery, notice: 'Delivery was successfully created.' }
@@ -68,6 +74,10 @@ class DeliveriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delivery_params
-      params.require(:delivery).permit(:order_id, :date_delivered, :payment_type, order_items_attributes: [:id, :quantity, :price, :weight, :amount, :_destroy, :product_id])
+      params.require(:delivery).permit(:order_id, :date_delivered, :payment_type)
+    end
+
+    def order_items_params
+      params.require(:order_items_attributes).permit!
     end
 end
