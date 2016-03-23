@@ -29,7 +29,7 @@ class DeliveriesController < ApplicationController
     respond_to do |format|
       if @errors.blank?
         @delivery.save
-        format.html { redirect_to @delivery, notice: 'Delivery was successfully created.' }
+        format.html { redirect_to deliveries_path, flash: { 'alert alert-success' => 'Delivery was successfully created.' } }
         format.json { render :show, status: :created, location: @delivery }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class DeliveriesController < ApplicationController
     respond_to do |format|
       if @errors.blank?
         @delivery.update(delivery_params)
-        format.html { redirect_to @delivery, notice: 'Delivery was successfully updated.' }
+        format.html { redirect_to deliveries_path, flash: { 'alert alert-success' => 'Delivery was successfully updated.'} }
         format.json { render :show, status: :ok, location: @delivery }
       else
         format.html { render :edit }
@@ -71,7 +71,7 @@ class DeliveriesController < ApplicationController
   def destroy
     @delivery.destroy
     respond_to do |format|
-      format.html { redirect_to deliveries_url, notice: 'Delivery was successfully destroyed.' }
+      format.html { redirect_to deliveries_url, flash: { 'alert alert-success' => 'Delivery was successfully destroyed.' } }
       format.json { head :no_content }
     end
   end
