@@ -1,6 +1,6 @@
 %h1 Listing deliveries
 
-%table
+%table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
   %thead
     %tr
       %th Order
@@ -13,13 +13,15 @@
   %tbody
     - @deliveries.each do |delivery|
       %tr
-        %td= delivery.order_id
-        %td= delivery.date_delivered
+        %td= delivery.order.try(:order_select_value)
+        %td= delivery.date_delivered.try(:strftime, "%d %B %Y")
         %td= delivery.payment_type
-        %td= link_to 'Show', delivery
-        %td= link_to 'Edit', edit_delivery_path(delivery)
-        %td= link_to 'Destroy', delivery, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          = link_to edit_delivery_path(delivery), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-pencil
+          = link_to delivery_path(delivery), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-trash
 
 %br
 
-= link_to 'New Delivery', new_delivery_path
+= link_to 'New Delivery', new_delivery_path, class: 'btn ink-reaction btn-accent-modified'
