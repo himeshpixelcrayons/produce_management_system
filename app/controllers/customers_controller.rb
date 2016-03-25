@@ -62,7 +62,7 @@ class CustomersController < ApplicationController
   end
 
   def customer_info
-    @orders = @customer.orders
+    @orders = @customer.undelivered_orders
     respond_to do |format|
       format.js
     end

@@ -1,11 +1,7 @@
 = hidden_field_tag :product_weight, product.try(:weight)
 = hidden_field_tag :product_quantity, product.try(:quantity)
 = order_item.hidden_field :id, value: order_item.object.try(:id) unless order_item.object.try(:new_record?)
-= order_item.hidden_field :product_id, value: product.try(:id)
-%td= product.try(:title)
-%td
-	= order_item.input :quantity, label: false, input_html: { class: 'quantity', value: order_item.object.try(:quantity) }
-	%span
-%td= order_item.input :weight, label: false
-%td= order_item.input :price, input_html: { value: product.try(:price) || order_item.object.try(:price) }, label: false
-%td= order_item.input :amount, label: false
+= render partial: '/order_items/order_items', locals: { order_item: order_item, product: product }
+- if controller_name == "orders" and (action_name == "edit" or action_name == "new" )
+	%td= order_item.input :price, input_html: { value: product.try(:price) || order_item.object.try(:price) }, label: false
+	%td= order_item.input :amount, label: false

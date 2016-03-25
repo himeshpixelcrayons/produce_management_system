@@ -75,7 +75,10 @@ class OrdersController < ApplicationController
   end
 
   def display_order_items
-    @order_items = @order.order_items
+    @delivery = @order.delivery || @order.build_delivery
+    @order.order_items.each do |order_item|
+      @delivery.order_items << OrderItem.new(quantity: order_item.quantity, price: order_item.price, amount: order_item.amount, weight: order_item.weight, product_id: order_item.product_id, order_id: @order.id)
+    end
     respond_to do |format|
       format.js
     end
@@ -90,6 +93,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:user_id, :customer_id, :date, order_items_attributes: [:id, :quantity, :price, :weight, :amount, :_destroy, :product_id])
+      params.require(:order).permit(:user_id, :customer_id, :date, order_items_attributes: [:id, :quantity, :price, :weight, :amount, :_destroy, :product_id, :order_id])
     end
 end

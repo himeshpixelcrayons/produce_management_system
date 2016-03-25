@@ -21,4 +21,7 @@ $(document).ready(function() {
 		"ordering": false,
 		"pageLength": 5
 	});
+	$('.input-group.date').datepicker({
+	  format: 'yyyy-mm-dd'
+	});
 });

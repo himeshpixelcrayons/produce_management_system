@@ -15,6 +15,8 @@ class DeliveriesController < ApplicationController
   # GET /deliveries/new
   def new
     @delivery = Delivery.new
+    @order_items = @delivery.order_items.present? ? @delivery.order_items : @delivery.order_items.build
+    @orders = []
   end
 
   # GET /deliveries/1/edit
@@ -25,10 +27,10 @@ class DeliveriesController < ApplicationController
   # POST /deliveries.json
   def create
     @delivery = Delivery.new(delivery_params)
-    update_order_items
+    @order = Order.find(params[:delivery][:order_id])
+    @orders = (@order.customer.undelivered_orders << @order).uniq
     respond_to do |format|
-      if @errors.blank?
-        @delivery.save
+      if @delivery.save
         format.html { redirect_to deliveries_path, flash: { 'alert alert-success' => 'Delivery was successfully created.' } }
         format.json { render :show, status: :created, location: @delivery }
       else
@@ -41,27 +43,13 @@ class DeliveriesController < ApplicationController
   # PATCH/PUT /deliveries/1
   # PATCH/PUT /deliveries/1.json
   def update
-    update_order_items
     respond_to do |format|
-      if @errors.blank?
-        @delivery.update(delivery_params)
+      if @delivery.update(delivery_params)
         format.html { redirect_to deliveries_path, flash: { 'alert alert-success' => 'Delivery was successfully updated.'} }
         format.json { render :show, status: :ok, location: @delivery }
       else
         format.html { render :edit }
         format.json { render json: @delivery.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update_order_items
-    @errors = Array.new
-    @order = Order.find(params[:delivery][:order_id])
-    if params[:order_items_attributes].present?
-      order_items_params.each do |key, value|
-        order_item = OrderItem.find(key)
-        error = order_item.update_attributes(value)
-        @errors << order_item.errors.full_messages if order_item.errors.present?
       end
     end
   end
@@ -81,11 +69,13 @@ class DeliveriesController < ApplicationController
     def set_delivery
       @delivery = Delivery.find(params[:id])
       @order = @delivery.order
+      @orders = (@order.customer.undelivered_orders << @order).uniq
+      @order_items = OrderItem.where(orderable_id: [@order.id, @delivery.id]).group_by(&:product_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delivery_params
-      params.require(:delivery).permit(:order_id, :date_delivered, :payment_type, order_items_attributes: [:id, :quantity, :price, :weight, :amount, :_destroy, :product_id])
+      params.require(:delivery).permit(:order_id, :date_delivered, :payment_type, order_items_attributes: [:id, :quantity, :price, :weight, :amount, :_destroy, :product_id, :order_id])
     end
 
     def order_items_params

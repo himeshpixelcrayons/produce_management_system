@@ -53,11 +53,13 @@
 										-if f.object.new_record? and f.object.errors.blank?
 											- @products.each do |product|
 												%tr
+													%td= product.title
 													= f.fields_for :order_items do |order_item|
 														= render partial: '/order_items/form', locals: { order_item: order_item, product: product }
 										- else
 											= f.fields_for :order_items, @order_items do |order_item|
 												%tr
+													%td= order_item.object.try(:product).try(:title)
 													= render partial: '/order_items/form', locals: { order_item: order_item, product: order_item.object.try(:product) }
 				.card-actionbar
 					.card-actionbar-row
