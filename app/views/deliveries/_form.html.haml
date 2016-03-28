@@ -12,7 +12,7 @@
 							.errors{style: 'color:red; text-align:left'}
 								- @errors.each do |error|
 									%li
-										=	"- #{error.first} \n"
+										=	"- #{error} \n"
 					%br/
 					.row
 						.col-md-6
@@ -49,9 +49,3 @@
 								= render partial: 'order_items'
 					%br/
 					= f.button :submit, "Submit", class: "btn ink-reaction btn-primary btn-accent-modified pull-right delivery-form"
-:javascript
-	$(document).ready(function(){
-		$(".delivery-form").click(function(){
-			debugger
-		})
-	});

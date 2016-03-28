@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
 
 	has_many :order_items, as: :orderable, dependent: :destroy
-	has_many :products, as: :orderable, through: :order_items, dependent: :destroy
+	has_many :products, through: :order_items, dependent: :destroy
 	has_one :delivery, dependent: :destroy
 	belongs_to :user
 	belongs_to :customer

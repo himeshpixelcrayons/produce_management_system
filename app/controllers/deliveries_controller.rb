@@ -29,8 +29,10 @@ class DeliveriesController < ApplicationController
     @delivery = Delivery.new(delivery_params)
     @order = Order.find(params[:delivery][:order_id])
     @orders = (@order.customer.undelivered_orders << @order).uniq
+    @delivery.save
+    @errors = @delivery.errors
     respond_to do |format|
-      if @delivery.save
+      if @errors.blank?
         format.html { redirect_to deliveries_path, flash: { 'alert alert-success' => 'Delivery was successfully created.' } }
         format.json { render :show, status: :created, location: @delivery }
       else
@@ -43,8 +45,10 @@ class DeliveriesController < ApplicationController
   # PATCH/PUT /deliveries/1
   # PATCH/PUT /deliveries/1.json
   def update
+    @delivery.update(delivery_params)
+    @errors = @delivery.errors.full_messages
     respond_to do |format|
-      if @delivery.update(delivery_params)
+      if @errors.blank?
         format.html { redirect_to deliveries_path, flash: { 'alert alert-success' => 'Delivery was successfully updated.'} }
         format.json { render :show, status: :ok, location: @delivery }
       else

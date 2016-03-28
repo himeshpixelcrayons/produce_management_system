@@ -2,8 +2,8 @@ class Product < ActiveRecord::Base
 	default_scope { order 'created_at ASC' }
 	validates :title, :product_type_id, :quantity, :price, :unit_of_quantity, presence: true
 
-	has_many :order_items
-	has_many :orders, through: :order_items
+	has_many :order_items, dependent: :destroy
+	has_many :orders, through: :order_items, dependent: :destroy
 
 	belongs_to :product_type
 

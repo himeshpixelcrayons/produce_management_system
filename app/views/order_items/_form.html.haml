@@ -2,6 +2,6 @@
 = hidden_field_tag :product_quantity, product.try(:quantity)
 = order_item.hidden_field :id, value: order_item.object.try(:id) unless order_item.object.try(:new_record?)
 = render partial: '/order_items/order_items', locals: { order_item: order_item, product: product }
-- if controller_name == "orders" and (action_name == "edit" or action_name == "new" )
+- if (controller_name == "orders" || controller_name == "customers") and (["edit", "new", "update", "create"].include?(action_name))
 	%td= order_item.input :price, input_html: { value: product.try(:price) || order_item.object.try(:price) }, label: false
 	%td= order_item.input :amount, label: false

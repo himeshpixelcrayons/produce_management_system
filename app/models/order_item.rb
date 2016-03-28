@@ -1,16 +1,17 @@
 class OrderItem < ActiveRecord::Base
   default_scope { order 'created_at ASC' }
 	belongs_to :product
-	belongs_to :order
   belongs_to :orderable, polymorphic: true
 
 	validates :quantity, :price, :weight, :amount, presence: true
-	#validate :check_quantity, if: :quantity_changed?
+  validate :check_quantity, if: :quantity_changed?
 
   #before_save :calculate_quantity, if: "orderable_type == 'Delivery'"
 
 	def check_quantity
-		self.errors.add(:quantity, "cannot be greater than ordered quantity for #{self.try(:product).try(:title)}.") if (self.quantity.present? and !self.new_record? and self.orderable_type == "Delivery") and (self.quantity_was < self.quantity)
+    order = self.orderable.order
+    order_item = order.order_items.where(product_id: self.product_id).first
+		self.errors.add(:quantity, "cannot be greater than ordered quantity for #{self.try(:product).try(:title)}.") if (self.quantity.present? and self.orderable_type == "Delivery") and (order_item.quantity < self.quantity)
 	end
 
 	def calculate_quantity
