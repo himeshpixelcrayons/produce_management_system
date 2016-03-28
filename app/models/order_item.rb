@@ -4,9 +4,9 @@ class OrderItem < ActiveRecord::Base
   belongs_to :orderable, polymorphic: true
 
 	validates :quantity, :price, :weight, :amount, presence: true
-  validate :check_quantity, if: :quantity_changed?
+  validate :check_quantity, if: Proc.new{|o| quantity_changed? and orderable_type == 'Delivery' }
 
-  before_save :calculate_quantity#, if: "orderable_type == 'Delivery'"
+  before_save :calculate_quantity, if: Proc.new{|o| orderable_type == 'Delivery'}
 
   attr_accessor :order_quantity
 
