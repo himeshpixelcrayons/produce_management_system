@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
   def order_items
     @items = Array.new
     @products.each do |product|
-      @items << OrderItem.new(order_id: @order.id, product_id: product.id, price: product.price)
+      @items << OrderItem.new(product_id: product.id, price: product.price)
     end
     @order_items = (@order.order_items + @items).uniq(&:product_id)
   end
@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
   def display_order_items
     @delivery = @order.delivery || @order.build_delivery
     @order.order_items.each do |order_item|
-      @delivery.order_items << OrderItem.new(quantity: order_item.quantity, price: order_item.price, amount: order_item.amount, weight: order_item.weight, product_id: order_item.product_id, order_id: @order.id)
+      @delivery.order_items << OrderItem.new(quantity: order_item.quantity, price: order_item.price, amount: order_item.amount, weight: order_item.weight, product_id: order_item.product_id)
     end
     respond_to do |format|
       format.js

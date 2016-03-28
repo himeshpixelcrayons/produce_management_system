@@ -79,7 +79,7 @@ class DeliveriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delivery_params
-      params.require(:delivery).permit(:order_id, :date_delivered, :payment_type, order_items_attributes: [:id, :quantity, :price, :weight, :amount, :_destroy, :product_id, :order_id])
+      params.require(:delivery).permit(:order_id, :date_delivered, :payment_type, order_items_attributes: [:id, :quantity, :price, :weight, :amount, :_destroy, :product_id, :order_quantity])
     end
 
     def order_items_params
