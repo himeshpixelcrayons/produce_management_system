@@ -16,7 +16,7 @@ class Customer < ActiveRecord::Base
 	end
 
 	def undelivered_orders
-		self.orders.where.not(id: Delivery.all.map(&:order_id))
+		self.orders.where(is_delivered: false)
 	end
 
 end
