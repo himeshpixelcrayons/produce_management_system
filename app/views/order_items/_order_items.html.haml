@@ -9,3 +9,17 @@
 	= order_item.hidden_field :amount, value: order_item.object.amount, class: 'amount'
 	= order_item.hidden_field :product_id, value: product.try(:id)
 	= order_item.hidden_field :id, value: order_item.object.try(:id) unless order_item.object.try(:new_record?)
+- if request.referrer.include?"deliveries"
+	%td.balance
+:javascript
+	$(document).ready(function(){
+		$("table.deliveries-table tr").each(function() {
+			var trContainer = $(this);
+				if(trContainer.has('td.balance').length > 0){
+					var orderQuantity = parseInt(trContainer.find('td.order_quantity').text());
+					var quantity = parseInt(trContainer.find('.quantity').val());
+					balance = (orderQuantity - quantity);
+					trContainer.find('td.balance').html(balance);
+				}
+		});
+	});

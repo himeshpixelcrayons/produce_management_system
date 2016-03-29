@@ -74,7 +74,7 @@ class DeliveriesController < ApplicationController
       @delivery = Delivery.find(params[:id])
       @order = @delivery.order
       @orders = (@order.customer.undelivered_orders << @order).uniq
-      @order_items = OrderItem.where(orderable_id: [@order.id, @delivery.id]).group_by(&:product_id)
+      @order_items = OrderItem.where("(orderable_id = ? AND orderable_type = 'Order') OR (orderable_id = ? AND orderable_type = 'Delivery')", @order.id, @delivery.id).group_by(&:product_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

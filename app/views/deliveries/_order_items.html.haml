@@ -1,6 +1,6 @@
 .panel.panel-default
 	.panel-body
-		%table.orders-table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+		%table.orders-table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin.deliveries-table
 			%thead
 				%tr
 					%th
@@ -8,12 +8,14 @@
 					%th Ordered Weight
 					%th Delivery Quantity
 					%th Delivery Weight
+					%th Balance
 			%tbody
 				- if @delivery.new_record?
 					- @delivery.order_items.each do |item|
 						%tr
 							%td= item.product.title
-							%td= item.quantity
+							%td.order_quantity
+								= item.quantity
 							%td= item.weight
 							= simple_fields_for "delivery[order_items_attributes[]]", item do |order_item|
 								= order_item.hidden_field :order_quantity, value: item.quantity
@@ -24,7 +26,8 @@
 							%td= order_items.first.product.title
 							- order_items.each do |item|
 								- if item.orderable_type == "Order"
-									%td= item.quantity
+									%td.order_quantity
+										= item.quantity
 									%td= item.weight
 								- else
 									= simple_fields_for "delivery[order_items_attributes[]]", item do |order_item|
@@ -36,4 +39,5 @@
 		"bFilter": true,
 		"bInfo": false,
 		"bAutoWidth": false
-	} );
+	});
+ 

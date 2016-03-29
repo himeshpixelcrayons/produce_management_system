@@ -35,6 +35,10 @@ $(document).on 'change', '.quantity', ->
   orderAmountContainer.val amount
   productQuantity = parseInt(trContainer.find('#product_quantity').val())
   spanContainer = trContainer.find('td span')
+  orderQuantity = parseInt(trContainer.find('td.order_quantity').text())
+  balance = orderQuantity - quantity
+  if trContainer.has('td.balance').length > 0
+    trContainer.find('td.balance').html balance
   if productQuantity < quantity
     spanContainer.html '<p style=\'color:red\'>You are trying to order in excess to what we have in the inventory</p>'
   else
