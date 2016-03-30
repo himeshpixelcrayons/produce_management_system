@@ -62,8 +62,10 @@ class CustomersController < ApplicationController
   end
 
   def customer_info
-    if request.referrer.include?("deliveries")
+    if request.try(:referrer).try(:include?, "deliveries")
       @orders = @customer.undelivered_orders
+    elsif request.try(:referrer).try(:include?, "invoices")
+      @orders = @customer.uninvoiced_orders
     else
       @orders = @customer.delivered_orders
     end

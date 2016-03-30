@@ -23,4 +23,12 @@ class Customer < ActiveRecord::Base
 		self.orders.where(is_delivered: true)
 	end
 
+	def uninvoiced_orders
+		orders = Array.new
+		self.orders.each do |order|
+			orders << order if order.try(:delivery) and !order.try(:delivery).try(:invoice)
+		end
+		orders
+	end
+
 end
