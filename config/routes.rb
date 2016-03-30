@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :invoices
   resources :deliveries
   resources :customers do
     get :customer_info, on: :member

@@ -76,8 +76,14 @@ class OrdersController < ApplicationController
 
   def display_order_items
     @delivery = @order.delivery || @order.build_delivery
-    @order.order_items.each do |order_item|
-      @delivery.order_items << OrderItem.new(quantity: order_item.quantity, price: order_item.price, amount: order_item.amount, weight: order_item.weight, product_id: order_item.product_id)
+    @invoice = @delivery.invoice || @delivery.build_invoice
+    if @delivery.order_items.blank?
+      @order.order_items.each do |order_item|
+        @delivery.order_items << OrderItem.new(quantity: order_item.quantity, price: order_item.price, amount: order_item.amount, weight: order_item.weight, product_id: order_item.product_id)
+      end
+    end
+    @delivery.order_items.each do |order_item|
+      @invoice.order_items << OrderItem.new(quantity: order_item.quantity, price: order_item.price, amount: order_item.amount, weight: order_item.weight, product_id: order_item.product_id)
     end
     respond_to do |format|
       format.js

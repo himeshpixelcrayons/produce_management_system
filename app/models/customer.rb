@@ -19,4 +19,8 @@ class Customer < ActiveRecord::Base
 		self.orders.where(is_delivered: false)
 	end
 
+	def delivered_orders
+		self.orders.where(is_delivered: true)
+	end
+
 end

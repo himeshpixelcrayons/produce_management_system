@@ -1,1 +1,6 @@
-$(".order-items").html("<%= j render partial: '/deliveries/order_items' %>")
+<% if request.referrer.include?("deliveries") %>
+	$(".order-items").html("<%= j render partial: '/deliveries/order_items' %>");
+<% else %>
+	$(".invoice-order-items").html("<%= j render partial: '/invoices/order_items' %>");
+	$("#invoice_delivery_id").val("<%= @delivery.id %>")
+<% end %>

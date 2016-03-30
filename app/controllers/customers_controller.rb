@@ -62,7 +62,11 @@ class CustomersController < ApplicationController
   end
 
   def customer_info
-    @orders = @customer.undelivered_orders
+    if request.referrer.include?("deliveries")
+      @orders = @customer.undelivered_orders
+    else
+      @orders = @customer.delivered_orders
+    end
     respond_to do |format|
       format.js
     end

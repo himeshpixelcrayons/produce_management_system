@@ -1,10 +1,10 @@
 .row
 	.col-lg-offset-1.col-md-10
-		= simple_form_for(@delivery, html: { class: 'form' }) do |f|
+		= simple_form_for(@invoice, html: { class: 'form' }) do |f|
 			.card
 				.card-head.style-primary
 					%header
-						= f.object.new_record? ? "New Delivery" : "Edit Delivery"
+						= f.object.new_record? ? "New Invoice" : "Edit Invoice"
 				.card-body
 					= f.error_notification
 					- if @errors.present?
@@ -19,32 +19,28 @@
 							.form-group
 								%label.col-sm-2.control-label Customer
 								.col-sm-8
-									= select_tag :customer_id, options_for_select(Customer.all.map{|c| [c.name, c.id]}, f.object.try(:order).try(:customer_id)), include_blank: true, class: 'form-control customer_id'
+									= select_tag :customer_id, options_for_select(Customer.all.map{|c| [c.name, c.id]}, f.object.try(:delivery).try(:order).try(:customer_id)), include_blank: true, class: 'form-control customer_id'
 								.col-sm-2
 									= link_to "Add Customer", new_customer_path, class: 'btn ink-reaction btn-flat btn-primary' unless Customer.exists?
 						.col-md-6
 							.form-group
 								%label.col-sm-4.control-label Orders
 								.col-sm-8
-									= f.input :order_id, as: :select, collection: @orders.map{|o| [o.order_select_value, o.id]}, input_html: { class: 'form-control order_id', selected: f.object.order_id }, label: false
+									= select_tag :order_id, options_for_select(@orders.map{|o| [o.order_select_value, o.id]}, f.object.try(:delivery).try(:order).try(:id)), include_blank: true, class: 'form-control order_id'
+									= f.hidden_field :delivery_id, value: f.object.delivery_id
 					.row
 						.col-md-6
 							.form-group
 								.col-md-8
 									#demo-date-format.input-group.date
 										.input-group-content
-											%input.form-control{:type => "text", name: "delivery[date_delivered]", value: f.object.date_delivered}/
-											%label Date Delivered
+											%input.form-control{:type => "text", name: "invoice[date]", value: f.object.date}/
+											%label Invoice Date
 										%span.input-group-addon
 											%i.fa.fa-calendar
-						.col-md-6
-							.form-group
-								%label.col-sm-4.control-label Payment Type
-								.col-md-8
-									= f.input :payment_type, as: :select, collection: Delivery::PAYMENT_TYPE.map{|v| [v, v]}, input_html: { class: 'form-control', selected: f.object.payment_type }, label: false
 					%br/
 					.row
-						.order-items
+						.invoice-order-items
 							- if !f.object.new_record?
 								= render partial: 'order_items'
 					%br/

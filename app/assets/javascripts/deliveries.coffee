@@ -1,5 +1,5 @@
 $(document).ready ->
-  $('#delivery_order_id').change ->
+  $('.order_id').change ->
     orderId = $(this).val()
     if orderId == ''
       $('.order-items').html ''

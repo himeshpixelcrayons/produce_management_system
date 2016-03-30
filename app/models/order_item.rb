@@ -42,4 +42,10 @@ class OrderItem < ActiveRecord::Base
     end
     product.update(quantity: quantity)
 	end
+
+  def get_order(attribute, delivery_object = nil)
+    delivery = self.try(:delivery) || delivery_object
+    item = delivery.try(:order).try(:order_items).where(product_id: self.product_id).first
+    item.send(attribute)
+  end
 end

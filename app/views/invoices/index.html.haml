@@ -1,0 +1,22 @@
+%h1 Listing invoices
+
+%table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+  %thead
+    %tr
+      %th Delivery
+      %th Date
+      %th
+  %tbody
+    - @invoices.each do |invoice|
+      %tr
+        %td= invoice.delivery
+        %td= invoice.date.try(:strftime, "%d %B %Y")
+        %td
+          = link_to edit_invoice_path(invoice), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-pencil
+          = link_to invoice_path(invoice), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-trash
+
+%br
+
+= link_to 'New Invoice', new_invoice_path, class: 'btn ink-reaction btn-accent-modified'

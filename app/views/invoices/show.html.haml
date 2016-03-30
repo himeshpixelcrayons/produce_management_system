@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Delivery:
+  = @invoice.delivery_id
+%p
+  %b Date:
+  = @invoice.date
+
+= link_to 'Edit', edit_invoice_path(@invoice)
+\|
+= link_to 'Back', invoices_path

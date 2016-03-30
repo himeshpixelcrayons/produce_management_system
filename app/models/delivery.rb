@@ -5,6 +5,7 @@ class Delivery < ActiveRecord::Base
 	belongs_to :order
 	has_many :order_items, as: :orderable, dependent: :destroy
 	has_many :products, through: :order_items, dependent: :destroy
+	has_one :invoice, dependent: :destroy
 
 	accepts_nested_attributes_for :order_items, allow_destroy: true
 
