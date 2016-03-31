@@ -9,7 +9,7 @@
   %tbody
     - @invoices.each do |invoice|
       %tr
-        %td= invoice.delivery
+        %td= invoice.try(:delivery).try(:order).try(:order_select_value)
         %td= invoice.date.try(:strftime, "%d %B %Y")
         %td
           = link_to edit_invoice_path(invoice), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
