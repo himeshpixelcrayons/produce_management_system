@@ -13,11 +13,11 @@ class OrderItem < ActiveRecord::Base
 	def check_quantity
     invalidate = false
     if self.new_record?
-      invalidate = (self.order_quantity.to_f < self.quantity)
+      invalidate = ((self.order_quantity.to_f < self.quantity) and (self.try(:product).try(:quantity) > self.quantity))
     else
       order = self.orderable.order
       order_item = order.order_items.where(product_id: self.product_id).first
-      invalidate = ((self.quantity.present? and self.orderable_type == "Delivery") and (order_item.quantity < self.quantity))
+      invalidate = ((self.quantity.present? and self.orderable_type == "Delivery") and (order_item.quantity < self.quantity) and (self.try(:product).try(:quantity) > self.quantity))
     end
 		self.errors.add(:quantity, "cannot be greater than ordered quantity for #{self.try(:product).try(:title)}.") if invalidate
 	end
