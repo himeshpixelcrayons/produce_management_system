@@ -1,0 +1,62 @@
+.row
+  .col-lg-offset-1.col-md-10
+    .card
+      .card-head.style-primary
+        %header
+          Vendor
+      .card-body
+        %table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+          %thead
+            %th Vendor Attributes
+            %th Values
+          %tbody
+            %tr
+              %td Name
+              %td= @vendor.name
+            %tr
+              %td Street
+              %td= @vendor.street
+            %tr
+              %td City
+              %td= @vendor.city
+            %tr
+              %td State
+              %td= @vendor.state
+            %tr
+              %td Zip
+              %td= @vendor.zip
+            %tr
+              %td Country
+              %td= @vendor.country
+            %tr
+              %td Landline
+              %td= @vendor.landline
+            %tr
+              %td Website
+              %td= @vendor.website
+            %tr
+              %td Email
+              %td= @vendor.email
+.row
+  .col-lg-offset-1.col-md-10
+    .card
+      .card-head.style-primary
+        %header
+          Vendor Products
+      .card-body
+        .vendor-products
+          = render template: 'vendor_products/index', locals: { vendor_products: @vendor.vendor_products }
+        %br/
+        %p= link_to "Add Product", new_vendor_product_path(vendor_id: @vendor.id), remote: true, class: 'btn ink-reaction btn-accent-modified pull-right'
+    %br/
+
+%br/
+= link_to 'Back', vendors_path, class: 'btn ink-reaction btn-accent-modified pull-right'
+.modal{"data-keyboard" => "false", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title New Vendor Product
+      .modal-body

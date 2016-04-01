@@ -45,6 +45,15 @@
               %li
                 = link_to customers_path, class: active_class('customers') do
                   %span.title Customers
+          %li.gui-folder
+            %a
+              .gui-icon
+                %i.fa.fa-user
+              %span.title Process Inventory Receiving
+            %ul
+              %li
+                = link_to vendors_path, class: active_class('vendors') do
+                  %span.title Vendors
         .menubar-foot-panel
           %small.no-linebreak.hidden-folded
             %span.opacity-75 Copyright © 2014

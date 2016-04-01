@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :vendors
   resources :invoices
   resources :deliveries
+  resources :vendors
   resources :customers do
     get :customer_info, on: :member
   end
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :product_types
+  resources :vendor_products
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

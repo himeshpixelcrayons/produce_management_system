@@ -1,0 +1,17 @@
+%table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+  %thead
+    %th Title
+    %th Price
+    %th Unit Of Quantity
+    %th
+  %tbody
+    - @vendor.vendor_products.each do |vendor_product|
+      %tr
+        %td= vendor_product.title
+        %td= vendor_product.price
+        %td= vendor_product.unit_of_quantity
+        %td
+          = link_to edit_vendor_product_path(vendor_product), remote: true, class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-pencil
+          = link_to vendor_product_path(vendor_product), remote: true, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-trash

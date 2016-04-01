@@ -1,0 +1,39 @@
+%h1 Listing vendors
+
+%table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+  %thead
+    %tr
+      %th Name
+      %th Street
+      %th City
+      %th State
+      %th Zip
+      %th Country
+      %th Landline
+      %th Website
+      %th Email
+      %th{colspan: "3"} Action
+
+  %tbody
+    - @vendors.each do |vendor|
+      %tr
+        %td= vendor.name
+        %td= vendor.street
+        %td= vendor.city
+        %td= vendor.state
+        %td= vendor.zip
+        %td= vendor.country
+        %td= vendor.landline
+        %td= vendor.website
+        %td= vendor.email
+        %td
+          = link_to vendor_path(vendor), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-eye
+          = link_to edit_vendor_path(vendor), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-pencil
+          = link_to vendor_path(vendor), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-trash
+
+%br
+
+= link_to 'New Vendor', new_vendor_path, class: 'btn ink-reaction btn-accent-modified'

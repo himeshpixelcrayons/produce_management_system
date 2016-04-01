@@ -1,0 +1,15 @@
+= simple_form_for @vendor_product, html: { remote: true } do |f|
+  = f.error_notification
+  .row
+    .col-md-6
+      = f.input :title, input_html: { class: 'form-control'}
+    .col-md-6
+      = f.input :price, input_html: { class: 'form-control'}
+      = f.hidden_field :vendor_id, value: @vendor.id
+  .row
+    .col-md-6
+      = f.input :unit_of_quantity, as: :select, collection: VendorProduct::UNIT_OF_QUANTITY.map{|v| [v, v]}, input_html: { class: 'form-control', selected: f.object.unit_of_quantity}
+  %br/
+  .modal-footer
+    %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+    = f.submit 'Submit', class: 'btn btn-primary'

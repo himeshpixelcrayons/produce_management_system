@@ -1,24 +1,24 @@
 .row
   .col-lg-offset-1.col-md-10
-    = simple_form_for(@customer) do |f|
+    = simple_form_for(@vendor) do |f|
       .card
         .card-head.style-primary
           %header
-            = f.object.new_record? ? "New Customer" : "Edit Customer"
+            = f.object.new_record? ? "New Vendor" : "Edit Vendor"
         .card-body
           = f.error_notification
           %br/
           .row
             .col-md-6
               .form-group
-                %label.col-sm-4.control-label First Name
+                %label.col-sm-4.control-label Name
                 .col-sm-8
-                  = f.input :first_name, input_html: { class: 'form-control' }, label: false
+                  = f.input :name, input_html: { class: 'form-control' }, label: false
             .col-md-6
               .form-group
-                %label.col-sm-4.control-label Last Name
+                %label.col-sm-4.control-label Email
                 .col-sm-8
-                  = f.input :last_name, input_html: { class: 'form-control' }, label: false
+                  = f.input :email, input_html: { class: 'form-control' }, label: false
           .row
             .col-md-6
               .form-group
@@ -55,14 +55,9 @@
           .row
             .col-md-6
               .form-group
-                %label.col-sm-4.control-label Cellphone
+                %label.col-sm-4.control-label Website
                 .col-sm-8
-                  = f.input :cellphone, input_html: { class: 'form-control' }, label: false
-            .col-md-6
-              .form-group
-                %label.col-sm-4.control-label Email
-                .col-sm-8
-                  = f.input :email, input_html: { class: 'form-control' }, label: false
+                  = f.input :website, input_html: { class: 'form-control' }, label: false
         .card-actionbar
           .card-actionbar-row
             = f.button :submit, class: "btn ink-reaction btn-primary btn-accent-modified"
