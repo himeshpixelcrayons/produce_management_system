@@ -1,36 +1,44 @@
-%p#notice= notice
-
-%p
-  %b First name:
-  = @customer.first_name
-%p
-  %b Last name:
-  = @customer.last_name
-%p
-  %b Street:
-  = @customer.street
-%p
-  %b City:
-  = @customer.city
-%p
-  %b State:
-  = @customer.state
-%p
-  %b Zip:
-  = @customer.zip
-%p
-  %b Country:
-  = @customer.country
-%p
-  %b Landline:
-  = @customer.landline
-%p
-  %b Cellphone:
-  = @customer.cellphone
-%p
-  %b Email:
-  = @customer.email
-
-= link_to 'Edit', edit_customer_path(@customer)
-\|
-= link_to 'Back', customers_path
+.row
+  .col-lg-offset-1.col-md-10
+    .card
+      .card-head.style-primary
+        %header
+          Customer
+      .card-body
+        %table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+          %thead
+            %th Customer Attributes
+            %th Values
+          %tbody
+            %tr
+              %td First name:
+              %td= @customer.first_name
+            %tr
+              %td Last name:
+              %td= @customer.last_name
+            %tr
+              %td Street:
+              %td= @customer.street
+            %tr
+              %td City:
+              %td= @customer.city
+            %tr
+              %td State:
+              %td= @customer.state
+            %tr
+              %td Zip:
+              %td= @customer.zip
+            %tr
+              %td Country:
+              %td= @customer.country
+            %tr
+              %td Landline:
+              %td= @customer.landline
+            %tr
+              %td Cellphone:
+              %td= @customer.cellphone
+            %tr
+              %td Email:
+              %td= @customer.email
+        %br/
+        = link_to "Back", customers_path, class: 'btn ink-reaction btn-accent-modified pull-right'

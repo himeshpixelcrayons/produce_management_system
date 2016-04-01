@@ -47,11 +47,9 @@
         .vendor-products
           = render template: 'vendor_products/index', locals: { vendor_products: @vendor.vendor_products }
         %br/
-        %p= link_to "Add Product", new_vendor_product_path(vendor_id: @vendor.id), remote: true, class: 'btn ink-reaction btn-accent-modified pull-right'
-    %br/
-
-%br/
-= link_to 'Back', vendors_path, class: 'btn ink-reaction btn-accent-modified pull-right'
+        %p.pull-right
+          = link_to "Add Product", new_vendor_product_path(vendor_id: @vendor.id), remote: true, class: 'btn ink-reaction btn-accent-modified'
+          = link_to "Back", vendors_path, class: 'btn ink-reaction btn-accent-modified'
 .modal{"data-keyboard" => "false", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
     .modal-content
