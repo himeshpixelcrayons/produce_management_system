@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Date:
+  = @purchase_order.date
+%p
+  %b Due date:
+  = @purchase_order.due_date
+%p
+  %b Is outstanding:
+  = @purchase_order.is_outstanding
+
+= link_to 'Edit', edit_purchase_order_path(@purchase_order)
+\|
+= link_to 'Back', purchase_orders_path

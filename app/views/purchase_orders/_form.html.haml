@@ -1,0 +1,40 @@
+.row
+	.col-lg-offset-1.col-md-10
+		= simple_form_for(@purchase_order, html: { class: 'form' }) do |f|
+			.card
+				.card-head.style-primary
+					%header
+						= f.object.new_record? ? "New Purchase Order" : "Edit Purchase Order"
+				.card-body
+					= f.error_notification
+					%br/
+					.row
+						.col-md-6
+							.form-group
+								%label.col-sm-2.control-label Vendor
+								.col-sm-8
+									= f.input :vendor_id, as: :select, collection: Vendor.all.map{|v| [v.name, v.id]}, input_html: { class: 'form-control vendor_id' }, label: false
+								.col-sm-2
+									= link_to "Add Vendor", new_vendor_path, class: 'btn ink-reaction btn-flat btn-primary' unless Vendor.exists?
+						.col-md-6
+							.form-group
+								%label.col-sm-4.control-label Address
+								.col-sm-8
+									= text_area_tag :address, f.object.try(:vendor).try(:address), class: 'form-control vendor_address', disabled: true
+					.row
+						.col-md-6
+							.form-group
+								%label.col-sm-4.control-label Contact
+								.col-sm-8
+									= text_field_tag :contact, f.object.try(:vendor).try(:landline), class: 'form-control vendor_contact', disabled: true
+						.col-md-6
+							.form-group.control-width-normal
+								#demo-date-format.input-group.date
+									.input-group-content
+										%input.form-control{:type => "text", name: "purchase_order[date]", value: f.object.date}/
+										%label Date
+									%span.input-group-addon
+										%i.fa.fa-calendar
+				.card-actionbar
+					.card-actionbar-row
+						= f.button :submit, class: "btn ink-reaction btn-primary btn-accent-modified"
