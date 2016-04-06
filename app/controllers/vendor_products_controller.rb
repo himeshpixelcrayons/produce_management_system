@@ -46,6 +46,6 @@ class VendorProductsController < ApplicationController
 
 	private
 		def vendor_product_params
-      params.require(:vendor_product).permit(:vendor_id, :title, :price, :unit_of_quantity)
+      params.require(:vendor_product).permit(:vendor_id, :title, :price, :unit_of_quantity, :quantity)
     end
 end

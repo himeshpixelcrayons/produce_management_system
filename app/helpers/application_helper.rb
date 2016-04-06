@@ -1,6 +1,6 @@
 module ApplicationHelper
 	def active_class(controller, action = nil)
-    ((controller.include?(controller_name) and action.blank?) || (controller_name == controller and action_name == action)) ? 'active' : ''
+    ((controller_name == controller and action.blank?)) ? 'active' : ''
   end
 
   def flash_message

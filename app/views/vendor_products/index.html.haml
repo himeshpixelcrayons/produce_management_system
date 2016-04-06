@@ -3,6 +3,7 @@
     %th Title
     %th Price
     %th Unit Of Quantity
+    %th Quantity
     %th
   %tbody
     - @vendor.vendor_products.each do |vendor_product|
@@ -10,6 +11,7 @@
         %td= vendor_product.title
         %td= vendor_product.price
         %td= vendor_product.unit_of_quantity
+        %td= vendor_product.quantity
         %td
           = link_to edit_vendor_product_path(vendor_product), remote: true, class: 'btn ink-reaction btn-icon-toggle btn-primary' do
             %i.fa.fa-pencil

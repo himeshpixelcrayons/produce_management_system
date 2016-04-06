@@ -1,0 +1,3 @@
+$('.purchase-order-items').html("<%= j render partial: '/purchase_order_items/form' %>");
+$(".vendor_address").val("<%= @vendor.try(:address) %>");
+$(".vendor_contact").val("<%= @vendor.try(:landline) %>");
