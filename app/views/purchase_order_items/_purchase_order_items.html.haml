@@ -1,0 +1,4 @@
+- @purchase_order_items.each do |poi|
+	= simple_fields_for "purchase_order[purchase_order_items_attributes[]]", poi do |purchase_order_item|
+		%tr
+			= render partial: '/purchase_order_items/form', locals: { purchase_order_item: purchase_order_item, vendor_product: purchase_order_item.object.try(:vendor_product) }

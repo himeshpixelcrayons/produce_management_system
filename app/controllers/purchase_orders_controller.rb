@@ -15,6 +15,7 @@ class PurchaseOrdersController < ApplicationController
   # GET /purchase_orders/new
   def new
     @purchase_order = PurchaseOrder.new
+    @purchase_order_items = @purchase_order.purchase_order_items.present? ? @purchase_order.purchase_order_items : @purchase_order.purchase_order_items.build
   end
 
   # GET /purchase_orders/1/edit
@@ -25,7 +26,7 @@ class PurchaseOrdersController < ApplicationController
   # POST /purchase_orders.json
   def create
     @purchase_order = PurchaseOrder.new(purchase_order_params)
-
+    @purchase_order_items = @purchase_order.purchase_order_items
     respond_to do |format|
       if @purchase_order.save
         format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully created.' }
@@ -65,10 +66,11 @@ class PurchaseOrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase_order
       @purchase_order = PurchaseOrder.find(params[:id])
+      @purchase_order_items = @purchase_order.purchase_order_items
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_order_params
-      params.require(:purchase_order).permit(:date, :due_date, :is_outstanding)
+      params.require(:purchase_order).permit(:date, :vendor_id, :due_date, :is_outstanding, purchase_order_items_attributes: [:id, :items_ordered, :items_received, :items_rejected, :vendor_product_id, :reject_reason] )
     end
 end

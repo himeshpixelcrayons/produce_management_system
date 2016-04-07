@@ -1,0 +1,11 @@
+%td= vendor_product.try(:title)
+%td
+	= purchase_order_item.input :items_ordered, input_html: { class: 'form-control'}, label: false
+%td
+	= purchase_order_item.input :items_received, input_html: { class: 'form-control' }, label: false
+%td
+	= purchase_order_item.input :items_rejected, input_html: { class: 'form-control' }, label: false
+%td
+	= purchase_order_item.input :reject_reason, input_html: { class: 'form-control' }, label: false
+	= purchase_order_item.hidden_field :vendor_product_id, value: vendor_product.try(:id)
+	= purchase_order_item.hidden_field :id, value: purchase_order_item.object.try(:id)

@@ -1,3 +1,4 @@
-$('.purchase-order-items').html("<%= j render partial: '/purchase_order_items/form' %>");
+$(".purchase-order-items").closest(".row").removeClass("hide");
+$('.purchase-order-items').html("<%= j render partial: '/purchase_order_items/purchase_order_items' %>");
 $(".vendor_address").val("<%= @vendor.try(:address) %>");
 $(".vendor_contact").val("<%= @vendor.try(:landline) %>");

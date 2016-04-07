@@ -18,8 +18,11 @@
 #= require_tree .
 $(document).ready ->
   $('.orders').DataTable
-    'ordering': false
-    'pageLength': 5
+    "bPaginate": true,
+    "bLengthChange": false,
+    "bFilter": true,
+    "bInfo": false,
+    "bAutoWidth": false
   $('.input-group.date').datepicker format: 'yyyy-mm-dd'
   return
 $(document).on 'change', '.quantity', ->

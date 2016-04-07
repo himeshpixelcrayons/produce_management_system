@@ -1,25 +1,26 @@
 %h1 Listing purchase_orders
 
-%table
+%table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
   %thead
     %tr
+      %th Vendor
       %th Date
       %th Due date
       %th Is outstanding
-      %th
-      %th
-      %th
+      %th{:colspan => "3"} Actions
 
   %tbody
     - @purchase_orders.each do |purchase_order|
       %tr
-        %td= purchase_order.date
-        %td= purchase_order.due_date
-        %td= purchase_order.is_outstanding
-        %td= link_to 'Show', purchase_order
-        %td= link_to 'Edit', edit_purchase_order_path(purchase_order)
-        %td= link_to 'Destroy', purchase_order, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+        %td= purchase_order.try(:vendor).try(:name)
+        %td= purchase_order.date.try(:strftime, "%d %B %Y")
+        %td= purchase_order.due_date.try(:strftime, "%d %B %Y")
+        %td= purchase_order.is_outstanding ? "Yes" : "No"
+        %td
+          = link_to edit_purchase_order_path(purchase_order), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-pencil
+          = link_to purchase_order_path(purchase_order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-trash
 %br
 
-= link_to 'New Purchase order', new_purchase_order_path
+= link_to 'New Purchase order', new_purchase_order_path, class: 'btn ink-reaction btn-accent-modified'

@@ -35,6 +35,35 @@
 										%label Date
 									%span.input-group-addon
 										%i.fa.fa-calendar
+					.row
+						.col-md-6
+							.form-group
+								%label.col-sm-4.control-label
+								.col-sm-8
+									= f.input :is_outstanding, as: :boolean, :input_html => { checked: f.object.is_outstanding }
+						.col-md-6
+							.form-group.control-width-normal
+								#demo-date-format.input-group.date
+									.input-group-content
+										%input.form-control{:type => "text", name: "purchase_order[due_date]", value: f.object.due_date}/
+										%label Due Date
+									%span.input-group-addon
+										%i.fa.fa-calendar
+					%br/
+					.row{class: "<%= f.object.errors.blank? ? '' : 'hide' %>"}
+						.panel.panel-default
+							.panel-body
+								%table.orders.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+									%thead
+										%tr
+											%th
+											%th Items Ordered
+											%th Items Received
+											%th Items Rejected
+											%th Reject Reason
+									%tbody.purchase-order-items
+										- if f.object.persisted? || f.object.errors.present?
+											= render partial: '/purchase_order_items/purchase_order_items'
 				.card-actionbar
 					.card-actionbar-row
 						= f.button :submit, class: "btn ink-reaction btn-primary btn-accent-modified"

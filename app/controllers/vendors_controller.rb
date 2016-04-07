@@ -69,6 +69,10 @@ class VendorsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_vendor
       @vendor = Vendor.find(params[:id])
+      @purchase_order_items = []
+      @vendor.vendor_products.each do |product|
+        @purchase_order_items << PurchaseOrderItem.new(items_ordered: product.quantity, vendor_product_id: product.id)
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
