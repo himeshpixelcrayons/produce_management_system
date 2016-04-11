@@ -27,10 +27,16 @@ class DeliveriesController < ApplicationController
   # POST /deliveries.json
   def create
     @delivery = Delivery.new(delivery_params)
-    @order = Order.find(params[:delivery][:order_id])
-    @orders = (@order.customer.undelivered_orders << @order).uniq
+    if params[:delivery][:order_id].present?
+      @order = Order.find(params[:delivery][:order_id])
+      @orders = (@order.customer.undelivered_orders << @order).uniq
+    end
+    if params[:customer_id].present?
+      @customer = Customer.find(params[:customer_id])
+      @orders = @customer.undelivered_orders
+    end
     @delivery.save
-    @errors = @delivery.errors
+    @errors = @delivery.errors.full_messages
     respond_to do |format|
       if @errors.blank?
         format.html { redirect_to deliveries_path, flash: { 'alert alert-success' => 'Delivery was successfully created.' } }

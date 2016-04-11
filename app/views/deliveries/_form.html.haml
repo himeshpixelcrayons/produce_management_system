@@ -7,6 +7,7 @@
 						= f.object.new_record? ? "New Delivery" : "Edit Delivery"
 				.card-body
 					= f.error_notification
+					= f.error :base
 					- if @errors.present?
 						%ul{style: 'list-style:none'}
 							.errors{style: 'color:red; text-align:left'}
@@ -19,7 +20,7 @@
 							.form-group
 								%label.col-sm-2.control-label Customer
 								.col-sm-8
-									= select_tag :customer_id, options_for_select(Customer.all.map{|c| [c.name, c.id]}, f.object.try(:order).try(:customer_id)), include_blank: true, class: 'form-control customer_id'
+									= select_tag :customer_id, options_for_select(Customer.all.map{|c| [c.name, c.id]}, params[:customer_id] || f.object.try(:order).try(:customer_id)), include_blank: true, class: 'form-control customer_id'
 								.col-sm-2
 									= link_to "Add Customer", new_customer_path, class: 'btn ink-reaction btn-flat btn-primary' unless Customer.exists?
 						.col-md-6

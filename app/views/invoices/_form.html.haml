@@ -7,6 +7,7 @@
 						= f.object.new_record? ? "New Invoice" : "Edit Invoice"
 				.card-body
 					= f.error_notification
+					= f.error :base
 					- if @errors.present?
 						%ul{style: 'list-style:none'}
 							.errors{style: 'color:red; text-align:left'}
