@@ -1,4 +1,4 @@
-%h1 Listing purchase_orders
+%h1 Listing Purchase Orders
 
 %table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
   %thead
@@ -17,6 +17,8 @@
         %td= purchase_order.due_date.try(:strftime, "%d %B %Y")
         %td= purchase_order.is_outstanding ? "Yes" : "No"
         %td
+          = link_to purchase_order_path(purchase_order), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
+            %i.fa.fa-eye
           = link_to edit_purchase_order_path(purchase_order), class: 'btn ink-reaction btn-icon-toggle btn-primary' do
             %i.fa.fa-pencil
           = link_to purchase_order_path(purchase_order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn ink-reaction btn-icon-toggle btn-primary' do

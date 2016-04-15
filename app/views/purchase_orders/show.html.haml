@@ -1,15 +1,43 @@
 %p#notice= notice
+.row
+  .col-lg-offset-1.col-md-10
+    .card
+      .card-head.style-primary
+        %header
+          Purchase Order
+      .card-body
+        %table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+          %thead
+            %th Purchase Order Attributes
+            %th Values
+          %tbody
+            %tr
+              %td Date
+              %td= @purchase_order.date
+            %tr
+              %td Due date
+              %td= @purchase_order.due_date
+            %tr
+              %td Is outstanding
+              %td= @purchase_order.is_outstanding
 
-%p
-  %b Date:
-  = @purchase_order.date
-%p
-  %b Due date:
-  = @purchase_order.due_date
-%p
-  %b Is outstanding:
-  = @purchase_order.is_outstanding
-
-= link_to 'Edit', edit_purchase_order_path(@purchase_order)
-\|
-= link_to 'Back', purchase_orders_path
+.row
+  .col-lg-offset-1.col-md-10
+    .card
+      .card-head.style-primary
+        %header
+          Purchase Order Items
+      .card-body
+        %table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
+          %thead
+            %th Items Ordered
+            %th Items Received
+            %th Iiems Rejected
+            %th Reject Reason
+          %tbody
+            - @purchase_order.purchase_order_items.each do |purchase_order_items|
+              %tr
+                %td= purchase_order_items.items_ordered
+                %td= purchase_order_items.items_ordered
+                %td= purchase_order_items.items_rejected
+                %td= purchase_order_items.reject_reason

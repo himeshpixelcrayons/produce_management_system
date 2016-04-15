@@ -33,6 +33,7 @@ class InvoicesController < ApplicationController
         format.html { redirect_to invoices_url, flash: { 'alert alert-success' => 'Invoice was successfully created.' }}
         format.json { render :show, status: :created, location: @invoice }
       else
+        @orders = []
         format.html { render :new }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
@@ -70,7 +71,7 @@ class InvoicesController < ApplicationController
       @delivery = @invoice.delivery
       @order = @delivery.order
       @orders = (@order.customer.undelivered_orders << @order).uniq
-      @order_items = OrderItem.where("(orderable_id = ? AND orderable_type = 'Order') OR (orderable_id = ? AND orderable_type = 'Delivery') OR (orderable_id = ? AND orderable_type = 'Invoice')", @order.id, @delivery.id, @invoice.id).group_by(&:product_id)   
+      @order_items = OrderItem.where("(orderable_id = ? AND orderable_type = 'Order') OR (orderable_id = ? AND orderable_type = 'Delivery') OR (orderable_id = ? AND orderable_type = 'Invoice')", @order.id, @delivery.id, @invoice.id).group_by(&:product_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

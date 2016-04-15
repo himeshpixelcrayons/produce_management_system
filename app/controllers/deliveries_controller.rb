@@ -42,6 +42,7 @@ class DeliveriesController < ApplicationController
         format.html { redirect_to deliveries_path, flash: { 'alert alert-success' => 'Delivery was successfully created.' } }
         format.json { render :show, status: :created, location: @delivery }
       else
+        @orders = []
         format.html { render :new }
         format.json { render json: @delivery.errors, status: :unprocessable_entity }
       end
