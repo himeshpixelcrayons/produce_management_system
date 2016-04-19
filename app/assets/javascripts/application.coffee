@@ -24,7 +24,9 @@ $(document).ready ->
     "bInfo": false,
     "bAutoWidth": false
   $('.input-group.date').datepicker format: 'yyyy-mm-dd'
+  $('.gross-amount').val(grossAmount())
   return
+
 $(document).on 'change', '.quantity', ->
   trContainer = $(this).closest('tr')
   quantity = parseInt($(this).val())
@@ -32,7 +34,7 @@ $(document).on 'change', '.quantity', ->
   weightContainer = trContainer.find('.weight')
   weight = productWeight * quantity
   weightContainer.val weight
-  orderPrice = trContainer.find('.price').val()
+  orderPrice = trContainer.find('.price').last().val();
   orderAmountContainer = trContainer.find('.amount')
   amount = orderPrice * quantity
   orderAmountContainer.val amount
@@ -40,6 +42,8 @@ $(document).on 'change', '.quantity', ->
   spanContainer = trContainer.find('td span')
   orderQuantity = parseInt(trContainer.find('td.order_quantity').text())
   balance = orderQuantity - quantity
+  $('.gross-amount').val(grossAmount())
+
   if trContainer.has('td.balance').length > 0
     trContainer.find('td.balance').html balance
   if productQuantity < quantity
@@ -47,3 +51,11 @@ $(document).on 'change', '.quantity', ->
   else
     spanContainer.html ''
   return
+
+grossAmount = ->
+  sum = 0
+  $.each $('input:hidden.amount'),() ->
+    amount = parseInt(this.value)
+    if amount > 0
+      sum = sum + amount
+  sum

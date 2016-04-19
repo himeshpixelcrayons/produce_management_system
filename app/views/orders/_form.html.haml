@@ -45,7 +45,7 @@
 								%table.orders.table.table-bordered.table-striped.table-responsive.table-hover.no-margin
 									%thead
 										%tr
-											%th
+											%th Product
 											%th Quantity
 											%th Weight
 											%th Price
@@ -62,6 +62,10 @@
 												%tr
 													%td= order_item.object.try(:product).try(:title)
 													= render partial: '/order_items/form', locals: { order_item: order_item, product: order_item.object.try(:product) }
+
 				.card-actionbar
+					.card-actionbar-row
+						%span Gross Amount :
+						%input.gross-amount{:type => "text"}
 					.card-actionbar-row
 						= f.button :submit, class: "btn ink-reaction btn-primary btn-accent-modified"

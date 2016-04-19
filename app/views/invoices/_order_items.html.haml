@@ -3,7 +3,7 @@
 		%table.orders-table.table.table-bordered.table-striped.table-responsive.table-hover.no-margin.deliveries-table
 			%thead
 				%tr
-					%th
+					%th Product
 					%th Ordered Quantity
 					%th Ordered Weight
 					%th Delivery Quantity
@@ -37,7 +37,7 @@
 									%td= item.weight
 								- else
 									= simple_fields_for "invoice[order_items_attributes[]]", item do |order_item|
-										= render partial: '/order_items/order_items', locals: { order_item: order_item, product: order_item.object.try(:product)}					
+										= render partial: '/order_items/order_items', locals: { order_item: order_item, product: order_item.object.try(:product)}
 :javascript
 	$('.orders-table').dataTable( {
 		"bPaginate": true,
@@ -46,4 +46,4 @@
 		"bInfo": false,
 		"bAutoWidth": false
 	});
- 
+
