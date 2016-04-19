@@ -34,7 +34,7 @@ $(document).on 'change', '.quantity', ->
   weightContainer = trContainer.find('.weight')
   weight = productWeight * quantity
   weightContainer.val weight
-  orderPrice = trContainer.find('.price').last().val();
+  orderPrice = trContainer.find('.price').val();
   orderAmountContainer = trContainer.find('.amount')
   amount = orderPrice * quantity
   orderAmountContainer.val amount

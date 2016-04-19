@@ -5,7 +5,6 @@
 	%span
 %td
 	= order_item.input :weight, label: false, input_html: { class: 'weight' }
-	= order_item.hidden_field :price, value: order_item.object.price, class: 'price'
 	= order_item.hidden_field :amount, value: order_item.object.amount, class: 'amount'
 	= order_item.hidden_field :product_id, value: product.try(:id)
 	= order_item.hidden_field :id, value: order_item.object.try(:id) unless order_item.object.try(:new_record?)
